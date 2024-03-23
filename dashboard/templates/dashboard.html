@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Dashboard</title>
+
+    <!-- Directory structuur gemaakt via: https://sentry.io/answers/serve-static-files-flask/ -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h2>Login Dashboard</h2>
+        <div class="table-container">
+            <input type="text" id="searchInput" placeholder="Zoek op gebruikersnaam">
+            <input type="date" id="dateInput">
+            <select id="eventTypeSelect">
+                <option value="">Event Type</option>
+                <option value="accepted password">Accepted password</option>
+                <option value="disconnected from">Disconnected From</option>
+                <option value="failed password">Failed password</option>
+                <option value="invalid user">Invalid user</option>
+            </select>
+            <button id="exportBtn">Exporteer naar Excel</button>
+            <button id="exportPdfBtn">Exporteer naar PDF</button>
+            <button id="clearFiltersBtn">Filters wissen</button>
+            <table id="logsTable">
+                <thead>
+                    <tr>
+                        <th>Gebruikersnaam</th>
+                        <th>Hostname</th>
+                        <th>Datum</th>
+                        <th>Tijd</th>
+                        <th>Event Type</th>
+                        <th>Volledig event</th>
+                        <th>IP adres</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.user }}</td>
+                        <td>{{ log.hostname }}</td>
+                        <td>{{ log.timestamp.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ log.timestamp.strftime('%H:%M:%S') }}</td>
+                        <td>{{ log.event_type }}</td>
+                        <td>{{ log.full_event }}</td>
+                        <td>{{ log.source_ip }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination">
+                <a href="#" id="prevPage">Vorige</a>
+                <span id="currentPage">Pagina 1</span>
+                <a href="#" id="nextPage">Volgende</a>
+            </div>
+        </div>
+        <div id="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
