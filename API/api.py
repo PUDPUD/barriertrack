@@ -46,10 +46,13 @@ if "archief" not in os.listdir(working_directory):
 
 # functie voor het opslaan van de ontvangen API data in TXT en json format
 def opslaan(json_data):
+    vandaag = datetime.now().strftime("%Y-%m-%d")
+
+    
     bestand_json = f"archief/{vandaag}.json"
     bestand_txt = f"archief/{vandaag}.txt"
 
-    with open(bestand_json, "w") as f:
+    with open(bestand_json, "a") as f:
         json.dump(json_data, f)
     with open(bestand_txt, "a") as f:
         f.write(json.dumps(json_data) + "\n")
