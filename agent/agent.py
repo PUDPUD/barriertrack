@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+import json
 
 
 
@@ -23,9 +24,18 @@ print(f"Logging barriertrack_agent gestart en verstuurd de data naar {url}")
 def verstuur_data(data):
     headers = {"Content-Type": "application/json"}
     response = requests.post(url, headers=headers, json=data)
-    print(f"\nLogging is verstuurd: \n StatusCode: {response.status_code}\n Logging: {data}")
+    
+    gebruiker = data["user"]
+    vol_event = data["full_event"]
+    van_ip = data["source_ip"]
+    gebeurtenis = data["event_type"]
+    print(f"\nLogging is verstuurd naar {url}: \n \n LET OP: {event_type} \n gebruiker = {gebruiker} \n van ip : {van_ip}, \n volledige event: {vol_event} " )
     if response.status_code != 200:
         print("Fout bij het versturen van data:", response.text)
+
+def opslaan_log_vandaag(data):
+    with open("verstuurde_logging.txt", "a") as f:
+        f.write(json.dumps(data) + "\n")
 
 # probleem is dat ubuntu verkeerde log format heeft namelijk: Mar  9 00:00:00 
 # en onze API kan alleen maar YYYY-MM-DD HH:MM:SS format aan
@@ -103,6 +113,7 @@ with open(log_file, "r") as f:
                     continue
                 else:
                     verstuur_data(data)
+                    opslaan_log_vandaag(data)
         else:
             continue
 
