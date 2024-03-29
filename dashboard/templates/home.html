@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Analyse Formulier</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- Bootstrap CSS -->
+    <nav class="navbar navbar-expand-lg ">
+        <img src="{{url_for('static', filename='img/logo.png')}}"  class=" logo_custom">
+        <a class="navbar-brand" href="#">barriertrack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/"">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/piechart_maken">Genereer piechart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/data_overzicht">data tables</a>
+
+
+        </div>
+      </nav>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Welkom bij BarrierTrack</h1>
+        <p class="lead">Een modern dashboard voor real-time monitoring en analyse van beveiligingslogs.</p>
+        <hr>
+        <h2>Over het project</h2>
+        <p>BarrierTrack is ontwikkeld om organisaties te helpen hun beveiligingspostuur te versterken door het bieden van diepgaande inzichten in potentiële beveiligingsdreigingen. Door het automatiseren van de loganalyse, kunnen gebruikers snel reacties formuleren op verdachte activiteiten en hun netwerkbeveiliging proactief beheren.</p>
+        <p>Belangrijkste functies:</p>
+        <ul>
+            <li><strong>Real-time monitoring:</strong> Houd uw systemen constant in de gaten en ontvang onmiddellijke meldingen over verdachte activiteiten.</li>
+            <li><strong>Gebruikersgedrag analyse:</strong> Krijg inzicht in gebruikersactiviteiten en identificeer patronen die kunnen wijzen op een beveiligingsrisico.</li>
+            <li><strong>Interactieve dashboards:</strong> Visualiseer uw data met aanpasbare grafieken en tabellen voor eenvoudige interpretatie van complexe informatie.</li>
+            <li><strong>Flexibele rapportage:</strong> Genereer en exporteer gedetailleerde rapporten om de beveiligingsstatus van uw organisatie te documenteren.</li>
+        </ul>
+        <p>Met BarrierTrack kunt u zich richten op wat echt belangrijk is: het beschermen van uw digitale assets tegen geavanceerde bedreigingen.</p>
+        <hr>
+        <p>Klaar om te beginnen? <a href="/piechart_generen" class="btn btn-primary">Genereer uw eerste piechart</a> of <a href="/data_overzicht" class="btn btn-secondary">Bekijk de laatste data</a>.</p>
+    </div>
+
+</body>
+</html>
+
+    

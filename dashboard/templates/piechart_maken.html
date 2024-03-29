@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Analyse</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <nav class="navbar navbar-expand-lg ">
+        <img src="{{url_for('static', filename='img/logo.png')}}"  class=" logo_custom">
+        <a class="navbar-brand" href="#">barriertrack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/"">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/piechart_maken">Genereer piechart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/data_overzicht">data tables</a>
+
+
+        </div>
+      </nav>
+</head>
+<body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Piechart Genereren</h1>
+
+    <div class="container mt-5">
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Hoe werkt het?</h4>
+        <p>Om een piechart te genereren, voer je de details hieronder in. Dit omvat de begin- en eindtijd van de periode die je wilt analyseren, evenals het type event dat je wilt onderzoeken.</p>
+        <hr>
+        <p class="mb-0">Gebruik de volgende formaten voor de invoer:</p>
+        <ul>
+            <li><strong>Begin Tijd:</strong> <code>2024-03-25 12:00:00</code></li>
+            <li><strong>Eind Tijd:</strong> <code>2024-03-25 13:00:00</code></li>
+            <li><strong>Event Type:</strong> Kies uit <code>Accepted password</code>, <code>Disconnected</code>, <code>Failed password for invalid user</code>, <code>Failed password</code>.</li>
+        </ul>
+    </div>
+        
+        <form method="POST" class="mt-3">
+            <div class="form-group">
+                <label for="begin_tijd">Begin Tijd:</label>
+                <input type="text" class="form-control" id="begin_tijd" name="begin_tijd">
+            </div>
+            <div class="form-group">
+                <label for="eind_tijd">Eind Tijd:</label>
+                <input type="text" class="form-control" id="eind_tijd" name="eind_tijd">
+            </div>
+            <div class="form-group">
+                <label for="event_type">Event Type:</label>
+                <input type="text" class="form-control" id="event_type" name="event_type">
+            </div>
+            <div class="form-group">
+                <label for="hostname">Hostname:</label>
+                <input type="text" class="form-control" id="hostname" name="hostname">
+            </div>
+            <button type="submit" class="btn btn-primary">Genereer Chart</button>
+        </form>
+    </div>
+    <!-- Optionele JavaScript en Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

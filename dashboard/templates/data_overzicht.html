@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Data Overzicht</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <nav class="navbar navbar-expand-lg ">
+        <img src="{{url_for('static', filename='img/logo.png')}}"  class=" logo_custom">
+        <a class="navbar-brand" href="#">barriertrack</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/"">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/piechart_maken">Genereer piechart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/data_overzicht">data tables</a>
+
+
+        </div>
+      </nav>
+</head>
+<body>
+    <nav    
+<div class="container mt-4 ">
+    <h2>Data Overzicht</h2>
+
+
+    
+    <form>
+      <div class="form-group">
+        <label for="aantal_rows">Aantal rows:</label>
+        <button type="submit" class="btn btn-primary toon-data-custom">Toon data</button>
+        <input type="number" class="form-control mt-3" id="aantal_rows" name="aantal_rows" placeholder="Aantal rows" value="{{ request.args.get('aantal_rows', '') }}">
+      </div>
+
+    </form>
+
+
+
+    <table class="table table-hover border-primary">
+
+        <thead>
+            <tr>
+                <th>Tijdstempel</th>
+                <th>Gebruiker</th>
+                <th>IP-adres</th>
+                <th>Hostname</th>
+                <th>Event Type</th>
+                <th>Volledige Event</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

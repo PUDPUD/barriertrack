@@ -1,66 +1,26 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
+    background-color: #d1cab8 !important; /* Lichtere achtergrond */
+}
+.navbar {
+    background-color: #c47139 ; /* Oranje achtergrond */
+}
+.logo_custom {
+    width: 50px;
+    height: 50px;
+ 
+}
+.nav-link {
+    color: #f8f1e9 !important; /* Oranje tekst */
+}
+.navbar-brand {
+    color: #e3e3e3 !important; /* Rode tekst voor de merknaam */
 }
 
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    text-align: center;
+.nav {
+    background-color: #ff6600; /* Oranje achtergrond */
 }
 
-h2 {
-    color: #333;
-}
-
-#filter-container {
-    margin-bottom: 20px;
-}
-
-#table-container {
-    width: 100%;
-}
-
-#logsTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.pagination {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pagination a {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    text-decoration: none;
-    color: #333;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.pagination a.active {
-    background-color: #007bff;
-    color: #fff;
+.toon-data-custom {
+    background-color: #ff6600; /* Oranje achtergrond */
+    color: #f8f1e9 !important; /* Oranje tekst */
 }
