@@ -89,9 +89,9 @@ with open(log_file, "r") as f:
                     user = line.split("from")[1].split()[0]
                     ip_address = line.split("from")[1].split()[0]
                     event_type = "Disconnected"
-                elif "Failed password" in line and "Invalid user" in line:
+                elif "Failed password" in line and "invalid user" in line:
                     event_type = "Failed password for invalid user" 
-                    user = line.split("user")[1].split()[0]
+                    user = line.split("invalid user")[1].split()[0]
                     ip_address = line.split("from")[1].split()[0]
                 elif "Failed password" in line and "message" not in line:
                     event_type = "Failed password"
