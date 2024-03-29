@@ -11,11 +11,20 @@ from pathlib import Path
 #https://dev.to/jakewitcher/using-env-files-for-environment-variables-in-python-applications-55a1
 dotenv_path = Path('../variables.env')
 load_dotenv(dotenv_path=dotenv_path)
+
 api_ip = os.getenv("API_IP")
 api_port = int(os.getenv("API_PORT"))
 api_listen_dir = str(os.getenv("API_LISTEN_DIR"))
+database_ip = os.getenv("DATABASE_IP")
+database_ip = os.getenv("DATABASE_IP")
+database_DB = os.getenv("POSTGRES_DB")
+database_user = os.getenv("POSTGRES_USER")
+database_password = os.getenv("POSTGRES_PASSWORD")
+
+
 working_directory = os.getcwd()
 vandaag = datetime.now().strftime("%Y-%m-%d")
+
 
 ## ansci kleur codes: https://gist.github.com/rene-d/9e584a7dd2935d0f461904b9f2950007?permalink_comment_id=4488193
 paars = "\033[0;35m"
@@ -29,14 +38,8 @@ geel = "\033[0;33m"
 # initialiseren van de Flask app
 app = Flask(__name__)
 
-#https://dev.to/jakewitcher/using-env-files-for-environment-variables-in-python-applications-55a1
-#database inlog met .env file
-database_inlog = {
-    "host": "localhost",
-    "database": os.getenv("POSTGRES_DB"),
-    "user": os.getenv("POSTGRES_USER"),
-    "password": os.getenv("POSTGRES_PASSWORD")
-}
+
+
 
 #archief map aanmaken
 if "archief" not in os.listdir(working_directory):
@@ -64,10 +67,10 @@ def opslaan(json_data):
 def ontvang_logging():
     try:
         conn = psycopg2.connect(
-            host=database_inlog["host"],
-            database=database_inlog["database"],
-            user=database_inlog["user"],
-            password=database_inlog["password"]
+            host=database_ip,
+            database=database_DB,
+            user=database_user,
+            password=database_password
         )
         cursor = conn.cursor()
         ontvangen_api_data = request.get_json()

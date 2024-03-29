@@ -3,16 +3,21 @@ from datetime import datetime, timedelta
 import os
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, redirect, url_for
+from dotenv import load_dotenv
+from pathlib import Path
 
-# variablen:
+#variablen:
+# directory van app bepalen:
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  
 
-database_inlog = {
-    "host": "95.179.185.228",
-    "database": "logging",
-    "user": "administrator",
-    "password": "heelsterk1"
-}
+#variablenfile inladen
+dotenv_path = Path('../variables.env')
+load_dotenv(dotenv_path=dotenv_path)
+
+database_ip = os.getenv("DATABASE_IP")
+database_DB = os.getenv("POSTGRES_DB")
+database_user = os.getenv("POSTGRES_USER")
+database_password = os.getenv("POSTGRES_PASSWORD")
 
 
 
@@ -31,10 +36,10 @@ def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
     try:
         #maak de verbinding met de database
         conn = psycopg2.connect(
-            host=database_inlog["host"],
-            database=database_inlog["database"],
-            user=database_inlog["user"],
-            password=database_inlog["password"]
+            host=database_ip,
+            database=database_DB,
+            user=database_user,
+            password=database_password
         )
         cur = conn.cursor()
 

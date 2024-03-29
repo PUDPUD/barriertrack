@@ -6,30 +6,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Data Overzicht</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <nav class="navbar navbar-expand-lg ">
-        <img src="{{url_for('static', filename='img/logo.png')}}"  class=" logo_custom">
-        <a class="navbar-brand" href="#">barriertrack</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/"">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/piechart_maken">Genereer piechart</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/data_overzicht">data tables</a>
+    
 
-
-        </div>
-      </nav>
 </head>
 <body>
-    <nav    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="{{url_for('static', filename='img/logo.png')}}" class="logo_custom">
+    <a class="navbar-brand" href="#">barriertrack</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/piechart_maken">Genereer piechart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/data_overzicht">Data Tables</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container mt-4 ">
     <h2>Data Overzicht</h2>
 
@@ -72,5 +74,9 @@
         </tbody>
     </table>
 </div>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

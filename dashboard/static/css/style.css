@@ -2,7 +2,7 @@ body {
     background-color: #d1cab8 !important; /* Lichtere achtergrond */
 }
 .navbar {
-    background-color: #c47139 ; /* Oranje achtergrond */
+    background-color: #c47139 !important; /* Oranje achtergrond */
 }
 .logo_custom {
     width: 50px;
