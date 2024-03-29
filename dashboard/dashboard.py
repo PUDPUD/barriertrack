@@ -97,7 +97,20 @@ eind_tijd = '2024-03-29 19:00:00'
 event_type = 'Failed password for invalid user'
 hostname = ''
 
-c
+def maak_piechart(data):
+    pad_naar_img = os.path.join(APP_ROOT, 'static/img/chart.png')
+    gebruikersnamen = [rij[0] for rij in data]  # Extract gebruikersnamen
+    mislukte_inlogpogingen = [rij[1] for rij in data]  # Extract pogingen
+
+    plt.figure(figsize=(10, 7))
+    plt.pie(mislukte_inlogpogingen, labels=gebruikersnamen, autopct='%1.1f%%', startangle=140)
+    plt.title('Aantal Mislukte Inlogpogingen per Gebruiker')
+    plt.axis('equal')  # Zorgt ervoor dat de pie chart een cirkel is1
+    plt.savefig(pad_naar_img)
+    plt.close()
+
+app = Flask(__name__)
+
 
 @app.route('/piechart_maken', methods=['GET', 'POST'])
 def piechart():
