@@ -19,10 +19,13 @@ database_DB = os.getenv("POSTGRES_DB")
 database_user = os.getenv("POSTGRES_USER")
 database_password = os.getenv("POSTGRES_PASSWORD")
 
+print(database_ip, database_DB, database_user, database_password)
+
 
 
 def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
 
+    print(f"event_type: {event_type}, hostname: {hostname}, begin_tijd: {begin_tijd}, eind_tijd: {eind_tijd}")
     #sql query met variabeln van functie
     query = """
     SELECT "user", COUNT(*) AS failed_attempts
@@ -42,7 +45,9 @@ def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
             password=database_password
         )
         cur = conn.cursor()
-
+        print(f"Verbonden met de database {database_DB}")
+        print(f"event_type: {event_type} hostname: {hostname} begin_tijd: {begin_tijd} eind_tijd: {eind_tijd}")
+        print(f"query: {query}")
         #voer de query uit
         cur.execute(query, (event_type, hostname, begin_tijd, eind_tijd))
 
@@ -69,10 +74,10 @@ def haal_laatste_x_records_op(x):
     """
     try:
         conn = psycopg2.connect(
-            host=database_inlog["host"],
-            database=database_inlog["database"],
-            user=database_inlog["user"],
-            password=database_inlog["password"]
+            host=database_ip,
+            database=database_DB,
+            user=database_user,
+            password=database_password
         )
         cur = conn.cursor()
         cur.execute(sql_query, (x,))
@@ -92,20 +97,7 @@ eind_tijd = '2024-03-29 19:00:00'
 event_type = 'Failed password for invalid user'
 hostname = ''
 
-def maak_piechart(data):
-    pad_naar_img = os.path.join(APP_ROOT, 'static/img/chart.png')
-    gebruikersnamen = [rij[0] for rij in data]  # Extract gebruikersnamen
-    mislukte_inlogpogingen = [rij[1] for rij in data]  # Extract pogingen
-
-    plt.figure(figsize=(10, 7))
-    plt.pie(mislukte_inlogpogingen, labels=gebruikersnamen, autopct='%1.1f%%', startangle=140)
-    plt.title('Aantal Mislukte Inlogpogingen per Gebruiker')
-    plt.axis('equal')  # Zorgt ervoor dat de pie chart een cirkel is1
-    plt.savefig(pad_naar_img)
-    plt.close()
-
-app = Flask(__name__)
-
+c
 
 @app.route('/piechart_maken', methods=['GET', 'POST'])
 def piechart():
@@ -118,7 +110,7 @@ def piechart():
         
         # Je logging_ophalen_groep functie wordt hier aangeroepen
         data = logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname)
-        
+        print(data)
         # Maak piechart en sla op in static directory
         maak_piechart(data)  # Pas deze functie aan om een bestandspad parameter te accepteren
         
