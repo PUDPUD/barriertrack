@@ -67,72 +67,44 @@ with open(log_file, "r") as f:
                 log_tijd = parts[2]
                 formatted_datetime = format_datetime(log_tijd, log_maand_dag)
                 server_name = parts[3]
+                ip_address = "Onbekend"
+                event_type = "Onbekend"
+                user = "Onbekend"
+
                 if "Accepted password" in line:
-                    user_index = line.find("for") + 4
-                    ip_index = line.find("from") + 5
-                    user = line[user_index:line.find("from")].strip()
-                    ip_address = line[ip_index:line.find("port")].strip()
-                    event_type = "Accepted Password"
-                    full_event = line.strip()
-                    data = {
-                        "timestamp": formatted_datetime,
-                        "user": user,
-                        "hostname": server_name,
-                        "event_type": event_type,
-                        "full_event": full_event,
-                        "source_ip": ip_address
-                    }
-                    verstuur_data(data)
-                    pass
-                if "Failed password" in line:
-                    user_index = line.find("for") + 4
-                    ip_index = line.find("from") + 5
-                    user = line[user_index:line.find("from")].strip()
-                    ip_address = line[ip_index:line.find("port")].strip()
-                    event_type = "Failed Password"
-                    full_event = line.strip()
-                    data = {
-                        "timestamp": formatted_datetime,
-                        "user": user,
-                        "hostname": server_name,
-                        "event_type": event_type,
-                        "full_event": full_event,
-                        "source_ip": ip_address
-                    }
-                    verstuur_data(data)
-                    pass
-                if "Disconnected" in line:
-                    user_index = line.find("for") + 4
-                    ip_index = line.find("from") + 5
-                    user = line[user_index:line.find("from")].strip()
-                    ip_address = line[ip_index:line.find("port")].strip()
+                    user = line.split("for")[1].split()[0]
+                    ip_address = line.split("from")[1].split()[0]
+                    event_type = "Accepted password"
+                elif "Disconnected"  in line and "[preauth]" not in line:
+                    user = line.split("from")[1].split()[0]
+                    ip_address = line.split("from")[1].split()[0]
                     event_type = "Disconnected"
-                    full_event = line.strip()
-                    data = {
-                        "timestamp": formatted_datetime,
-                        "user": user,
-                        "hostname": server_name,
-                        "event_type": event_type,
-                        "full_event": full_event,
-                        "source_ip": ip_address
+                elif "Failed password" in line and "Invalid user" in line:
+                    event_type = "Failed password for invalid user" 
+                    user = line.split("user")[1].split()[0]
+                    ip_address = line.split("from")[1].split()[0]
+                elif "Failed password" in line and "message" not in line:
+                    event_type = "Failed password"
+                    user = line.split("for")[1].split()[0]
+                    ip_address = line.split("from")[1].split()[0]
+                    
+                full_event = line.strip()
+
+
+                data = {
+                    "timestamp": formatted_datetime,
+                    "user": user,
+                    "hostname": server_name,
+                    "event_type": event_type,
+                    "full_event": full_event,
+                    "source_ip": ip_address
                     }
+                if event_type == "Onbekend":
+                    continue
+                else:
                     verstuur_data(data)
-                    pass
-                if "Invalid user" in line:
-                    user_index = line.find("for") + 4
-                    ip_index = line.find("from") + 5
-                    user = line[user_index:line.find("from")].strip()
-                    ip_address = line[ip_index:line.find("port")].strip()
-                    event_type = "Invalid user"
-                    full_event = line.strip()
-                    data = {
-                        "timestamp": formatted_datetime,
-                        "user": user,
-                        "hostname": server_name,
-                        "event_type": event_type,
-                        "full_event": full_event,
-                        "source_ip": ip_address
-                    }
-                    verstuur_data(data)
-                    pass
+        else:
+            continue
+
+
 

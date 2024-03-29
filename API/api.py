@@ -63,7 +63,12 @@ def opslaan(json_data):
 @app.route(api_listen_dir, methods=["POST"])
 def ontvang_logging():
     try:
-        conn = psycopg2.connect(**database_inlog)
+        conn = psycopg2.connect(
+            host=database_inlog["host"],
+            database=database_inlog["database"],
+            user=database_inlog["user"],
+            password=database_inlog["password"]
+        )
         cursor = conn.cursor()
         ontvangen_api_data = request.get_json()
 
