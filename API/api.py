@@ -16,7 +16,6 @@ api_ip = os.getenv("API_IP")
 api_port = int(os.getenv("API_PORT"))
 api_listen_dir = str(os.getenv("API_LISTEN_DIR"))
 database_ip = os.getenv("DATABASE_IP")
-database_ip = os.getenv("DATABASE_IP")
 database_DB = os.getenv("POSTGRES_DB")
 database_user = os.getenv("POSTGRES_USER")
 database_password = os.getenv("POSTGRES_PASSWORD")
@@ -26,13 +25,6 @@ working_directory = os.getcwd()
 vandaag = datetime.now().strftime("%Y-%m-%d")
 
 
-## ansci kleur codes: https://gist.github.com/rene-d/9e584a7dd2935d0f461904b9f2950007?permalink_comment_id=4488193
-paars = "\033[0;35m"
-stop_kleur = "\033[0m"
-bold  = "\033[1m"
-rood = "\033[0;31m"
-blauw = "\033[0;34m"
-geel = "\033[0;33m"
 
 
 # initialiseren van de Flask app
@@ -87,8 +79,8 @@ def ontvang_logging():
         event_type = ontvangen_api_data.get("event_type", "Onbekend")
         full_event = ontvangen_api_data.get("full_event", "Onbekend")
 
-        print(f"{rood}{bold} Ontvangen data: {stop_kleur} \n {rood}Van server:{stop_kleur} {blauw} {hostname} {stop_kleur} \n {geel}{ontvangen_api_data} {stop_kleur}")
-        cursor.execute("""
+        print(f" Ontvangen data:  \n Van server IP: {source_ip} {hostname} {stop_kleur} \n {geel}{ontvangen_api_data} {stop_kleur}")
+        cursor.execute("""  
             INSERT INTO public.auth_log (timestamp, "user", hostname, event_type, full_event, source_ip)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (timestamp, user, hostname, event_type, full_event, source_ip))

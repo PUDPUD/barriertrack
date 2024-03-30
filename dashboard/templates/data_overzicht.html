@@ -38,8 +38,12 @@
 
     
     <form>
+
       <div class="form-group">
         <label for="aantal_rows">Aantal rows:</label>
+        <a href="{{url_for('static', filename='img/data_overzicht.pdf')}}" download="Dataoverzicht_barriertrack.pdf"class="btn">
+            <img class="download_pdf" src="https://beacon.com.sg/tyftulun/2020/09/PDF-download-button.png" class="pdf_custom">
+        </a>
         <button type="submit" class="btn btn-primary toon-data-custom">Toon data</button>
         <input type="number" class="form-control mt-3" id="aantal_rows" name="aantal_rows" placeholder="Aantal rows" value="{{ request.args.get('aantal_rows', '') }}">
       </div>
