@@ -3,8 +3,12 @@ from datetime import datetime, timedelta
 import os
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, redirect, url_for
+#laden van de variablenZ
 from dotenv import load_dotenv
 from pathlib import Path
+
+#rapporten en xlsx maken
+
 
 #variablen:
 # directory van app bepalen:
@@ -14,10 +18,13 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = Path('../variables.env')
 load_dotenv(dotenv_path=dotenv_path)
 
+print(dotenv_path)
+
 database_ip = os.getenv("DATABASE_IP")
 database_DB = os.getenv("POSTGRES_DB")
 database_user = os.getenv("POSTGRES_USER")
 database_password = os.getenv("POSTGRES_PASSWORD")
+dashboard_port = os.getenv("DASHBOARD_PORT")
 
 print(database_ip, database_DB, database_user, database_password)
 
@@ -25,7 +32,6 @@ print(database_ip, database_DB, database_user, database_password)
 
 def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
 
-    print(f"event_type: {event_type}, hostname: {hostname}, begin_tijd: {begin_tijd}, eind_tijd: {eind_tijd}")
     #sql query met variabeln van functie
     query = """
     SELECT "user", COUNT(*) AS failed_attempts
@@ -47,7 +53,6 @@ def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
         cur = conn.cursor()
         print(f"Verbonden met de database {database_DB}")
         print(f"event_type: {event_type} hostname: {hostname} begin_tijd: {begin_tijd} eind_tijd: {eind_tijd}")
-        print(f"query: {query}")
         #voer de query uit
         cur.execute(query, (event_type, hostname, begin_tijd, eind_tijd))
 
@@ -79,9 +84,19 @@ def haal_laatste_x_records_op(x):
             user=database_user,
             password=database_password
         )
+        
         cur = conn.cursor()
         cur.execute(sql_query, (x,))
         resultaten = cur.fetchall()
+        #Maak van de opgehaalde data een pandas data frame
+        panda_data = pd.DataFrame(resultaten, columns=['timestamp', 'user', 'source_ip', 'hostname', 'event_type', 'full_event'])
+
+        #sla de data op als xlsx
+        xlsx_path = os.path.join(APP_ROOT, 'static', 'exports', 'data.xlsx')
+        df.to_excel(xlsx_path, index=False)
+
+
+
         print(resultaten)
         return resultaten
     except Exception as e:
@@ -146,5 +161,6 @@ def data_overzicht():
 def start_page():
     return render_template('home.html')
 
+print(dashboard_port)
 if __name__ == '__main__':
-    app.run(port=5761, debug=True)
+    app.run(port=dashboard_port, debug=True)
