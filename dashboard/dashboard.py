@@ -90,11 +90,9 @@ def haal_laatste_x_records_op(x):
         cur.execute(sql_query, (x,))
         resultaten = cur.fetchall()
         #Maak van de opgehaalde data een pandas data frame
-        panda_data = pd.DataFrame(resultaten, columns=['timestamp', 'user', 'source_ip', 'hostname', 'event_type', 'full_event'])
 
         #sla de data op als xlsx
-        xlsx_path = os.path.join(APP_ROOT, 'static', 'exports', 'data.xlsx')
-        df.to_excel(xlsx_path, index=False)
+
 
 
 
