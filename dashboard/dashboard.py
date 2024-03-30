@@ -25,6 +25,7 @@ database_DB = os.getenv("POSTGRES_DB")
 database_user = os.getenv("POSTGRES_USER")
 database_password = os.getenv("POSTGRES_PASSWORD")
 dashboard_port = os.getenv("DASHBOARD_PORT")
+dashboard_ip = os.getenv("DASHBOARD_IP")
 
 print(database_ip, database_DB, database_user, database_password)
 
@@ -163,4 +164,4 @@ def start_page():
 
 print(dashboard_port)
 if __name__ == '__main__':
-    app.run(port=dashboard_port, debug=True)
+    app.run(host=dashboard_ip, port=dashboard_port, debug=True)
