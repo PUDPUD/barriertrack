@@ -67,7 +67,7 @@ De API verbindt met de database om logdata te ontvangen en te verwerken.
 Het dashboard biedt een visuele weergave van de data.
 De API verbindt met de database om logdata te ontvangen en te verwerken.
 - **Automatisch Starten**: Gebruik `./install.sh` om de API als service te installeren.
-- **Starten**: Voer `python3 app.py` uit in de dashboard directory om het dashboard te starten.
+- **Starten**: Voer `python3 dashboard.py` uit in de dashboard directory om het dashboard te starten.
 
 
 
