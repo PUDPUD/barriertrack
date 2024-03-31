@@ -41,11 +41,7 @@ def opslaan(json_data):
     vandaag = datetime.now().strftime("%Y-%m-%d")
 
     
-    bestand_json = f"archief/{vandaag}.json"
     bestand_txt = f"archief/{vandaag}.txt"
-
-    with open(bestand_json, "a") as f:
-        json.dump(json_data, f)
     with open(bestand_txt, "a") as f:
         f.write(json.dumps(json_data) + "\n")
 
@@ -67,9 +63,6 @@ def ontvang_logging():
         cursor = conn.cursor()
         ontvangen_api_data = request.get_json()
 
-        # Parseer de timestamp met de juiste formaat en huidig jaar
-        #timestamp_str = ontvangen_api_data["timestamp"] + " " + str(datetime.now().year)  # Voeg huidig jaar toe
-        #timestamp = datetime.strptime(timestamp_str, '%b %d %H:%M:%S %Y')
         timestamp = ontvangen_api_data["timestamp"]
 
         # extraheer de json data 
@@ -80,6 +73,8 @@ def ontvang_logging():
         full_event = ontvangen_api_data.get("full_event", "Onbekend")
 
         print(f" Ontvangen data:  \n Van server IP: {source_ip} {hostname} {stop_kleur} \n {geel}{ontvangen_api_data} {stop_kleur}")
+
+        # sla de ontvangen data op in de databse met de opgehaalde gegevens
         cursor.execute("""  
             INSERT INTO public.auth_log (timestamp, "user", hostname, event_type, full_event, source_ip)
             VALUES (%s, %s, %s, %s, %s, %s)
@@ -99,7 +94,7 @@ def ontvang_logging():
 # Start de API flask app
 if __name__ == "__main__":
 
-    print(f" \n \n {paars}{bold} luisteren op http://{api_ip}:{api_port}{api_listen_dir} \n \n {stop_kleur}")
+    print(f" \n \n  luisteren op http://{api_ip}:{api_port}{api_listen_dir} \n \n ")
     app.run(host=api_ip, port=api_port)
 
 

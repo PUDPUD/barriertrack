@@ -1,4 +1,6 @@
 Flask==3.0.2
+matplotlib==3.8.3
 psycopg2_binary==2.9.9
 python-dotenv==1.0.1
+reportlab==4.1.0
 Requests==2.31.0

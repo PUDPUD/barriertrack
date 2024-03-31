@@ -1,66 +1,73 @@
-# Barriertrack || Hoofdserver README
+# barriertrack || Hoofdserver Readme
 
 Welkom bij de setup-instructies voor de Barriertrack server. Volg deze stappen om de server correct op te zetten.
 
-## Installatie
+
+### Vereisten
+- **Besturingssysteem**: Ubuntu Server (aanbevolen versies: 20.04 of 22.04).
+- **Python**: Zorg ervoor dat Python 3 en `pip` zijn geïnstalleerd.
+- **Docker**: Noodzakelijk voor het draaien van de database en pgAdmin.
+- **Python Dependencies**: Vereist voor zowel de Hoofdserver als de Agent.
+
+
+
 
 ### Python Dependencies
-Je kunt de requirements vinden van python in de requirements.txt file. Run dan pip install requirements.txt om de dependencies te installeren.
+De Python dependencies kunnen worden geïnstalleerd via de `requirements.txt` file. Voer het volgende commando uit om ze te installeren:
 
-``
+```bash
 pip install -r requirements.txt
-``
 
-### Variablen
-Voordat je begint met de installtie4 contrroleer het ``variables.env`` bestand om er voor te zorgen dat alles correct staat. Dit bestand heeft de belangerijkse configuratievairbale voor de databasen en de API, zoals de inloggevens en API server instellingen
-
-Controleer en pas indien nodig aan:
-*Database gebruikersnaam en wachtwoord (POSTGRES_USER, POSTGRES_PASSWORD)
-*Database naam (POSTGRES_DB)
-*API IP-adres (API_IP)
-*API poort (API_PORT)
-*API endpoint pad (API_LISTEN_DIR)
-
-# Database
-Volg deze stappen om je database en pgAdminop te zetten:
-
-start de database en pgadmin containers op:
-``
-cd /database
-sudo docker-compose up -d 
-``
-
-Zorg ervoor dat install_config.sh uitvoerbaar is door het volgende commando uit te voeren:
-
-``
-chmod +x install_config.sh
-``
-
-Wanneer de containers draaien, voer het install_config.sh script uit 
-``
-./install_config.sh
-``
-
-
-# De API
-
-###variablen
-
-Zorg dat je de requirements hebt geinstaleerd en de variables.env hebt gecontroleerd
-
-Voer dan het ./install.sh script uit om de API als een service te installeren:
 ```
-install.sh
-``
-Om de status van de API voer dan uit:
-``
-systemctl status barriertrack_api
-``
 
-Wil je de API handmatig starten doe  dan:
-``
-python3 api.py 
-``
+### Variabelen
+
+Controleer het variables.env bestand voor de juiste configuratie van de database en de API, zoals inloggegevens en serverinstellingen. Pas de volgende variabelen aan indien nodig:
+
+
+### Database Variabelen
+- `POSTGRES_USER`: De gebruikersnaam voor toegang tot de PostgreSQL database.
+- `POSTGRES_PASSWORD`: Het wachtwoord voor de PostgreSQL database gebruiker.
+- `POSTGRES_DB`: De naam van de PostgreSQL database die gebruikt wordt voor het loggen van gegevens.
+- `DATABASE_IP`: Het IP-adres waarop de PostgreSQL database bereikbaar is.
+
+### PgAdmin Variabelen
+- `PGADMIN_DEFAULT_EMAIL`: Het standaard e-mailadres om in te loggen op pgAdmin, de webgebaseerde administratie tool voor PostgreSQL.
+- `PGADMIN_DEFAULT_PASSWORD`: Het standaard wachtwoord voor het pgAdmin account.
+
+### API Variabelen
+- `API_IP`: Het IP-adres waarop de API luistert. `0.0.0.0` betekent dat de API op alle beschikbare netwerkinterfaces luistert.
+- `API_PORT`: De poort waarop de API luistert voor inkomende verzoeken.
+- `API_LISTEN_DIR`: Het endpoint pad waar de API verzoeken voor logging input ontvangt.
+
+### Dashboard Variabelen
+- `DASHBOARD_PORT`: De poort waarop het dashboard luistert voor inkomende verzoeken.
+- `DASHBOARD_IP`: Het IP-adres waarop het dashboard luistert. `0.0.0.0` geeft aan dat het dashboard op alle beschikbare netwerkinterfaces luistert.
+
+## Installatie Script
+
+## Installatie
+
+### Docker en Python Dependencies
+- **Docker**: Vereist voor het opzetten van de database en pgAdmin. Zie [Docker's officiële documentatie](https://docs.docker.com/get-docker/) voor installatie.
+- **Python Dependencies**: Installeer via `requirements.txt` met het commando `pip install -r requirements.txt`.
+
+## Opstarten
+
+### Database en pgAdmin
+1. Start de services met Docker-compose: `sudo docker-compose up -d` vanuit de `barriertrack/database` directory.
+2. Maak `install_config.sh` uitvoerbaar met `chmod +x install_config.sh` en voer het uit met `./install_config.sh`.
+
+### API
+De API verbindt met de database om logdata te ontvangen en te verwerken.
+- **Automatisch Starten**: Gebruik `./install.sh` om de API als service te installeren.
+- **Handmatig Starten**: Voer `python3 api.py` uit voor een directe start.
+
+### Dashboard
+Het dashboard biedt een visuele weergave van de data.
+De API verbindt met de database om logdata te ontvangen en te verwerken.
+- **Automatisch Starten**: Gebruik `./install.sh` om de API als service te installeren.
+- **Starten**: Voer `python3 app.py` uit in de dashboard directory om het dashboard te starten.
 
 
 
