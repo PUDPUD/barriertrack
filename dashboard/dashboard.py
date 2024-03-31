@@ -178,6 +178,9 @@ def resultaten():
     # De piechart wordt getoond door de afbeelding in de static directory te gebruiken
     return render_template('resultaten.html', image_path=url_for('static', filename='chart.png'))
 
+
+
+
 @app.route('/data_overzicht', methods=['GET', 'POST'])
 def data_overzicht():
 
@@ -186,6 +189,8 @@ def data_overzicht():
     data = haal_laatste_x_records_op(aantal_rows)
 
     return render_template('data_overzicht.html', data=data)
+
+
 
 @app.route('/')
 def start_page():

@@ -24,9 +24,6 @@ database_password = os.getenv("POSTGRES_PASSWORD")
 working_directory = os.getcwd()
 vandaag = datetime.now().strftime("%Y-%m-%d")
 
-
-
-
 # initialiseren van de Flask app
 app = Flask(__name__)
 
@@ -51,6 +48,9 @@ def opslaan(json_data):
         json.dump(json_data, f)
     with open(bestand_txt, "a") as f:
         f.write(json.dumps(json_data) + "\n")
+
+
+
 
 #https://www.digitalocean.com/community/tutorials/processing-incoming-request-data-in-flask
 #https://medium.com/@shahrukhshl0/building-a-flask-crud-application-with-psycopg2-58de201e3c14
@@ -93,6 +93,8 @@ def ontvang_logging():
     finally:
         if conn:
             conn.close()
+
+
 
 # Start de API flask app
 if __name__ == "__main__":

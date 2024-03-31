@@ -4,7 +4,7 @@
 SERVICE_NAME=barriertrack_api
 
 # Pad naar de directory van je Flask app
-APP_DIRECTORY="/srv/flask_api"
+APP_DIRECTORY="$(pwd)"
 
 # Pad naar de Python interpreter, pas deze aan naar jouw omgeving
 PYTHON_PATH="/usr/bin/python3"
