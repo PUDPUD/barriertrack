@@ -73,6 +73,8 @@ def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
         if conn:
             conn.close()
 
+#inspiratie voor het PDF raport: https://zewaren.net/reportlab.html
+#deze functie haalt niet alleen de records op maar, maakt tegelijkertijd ook een PDF raport met de data
 def haal_laatste_x_records_op(x):
     sql_query = """ 
     SELECT timestamp, "user", source_ip, hostname, event_type, full_event
@@ -105,20 +107,20 @@ def haal_laatste_x_records_op(x):
         headers = ["Timestamp", "User", "Source IP", "Hostname", "Event Type", "Full Event"]
 
         data_tabel_inhoud = [headers] 
-
+        #voeg een lijst in een lijst toe, zodat je een 2d lijst krijgt. van de tabel, met headers al top row
         for rij in resultaten:
             data_tabel_inhoud.append(list(rij))
 
 
 
 
-        
+
         table = Table(data_tabel_inhoud)
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.orange), # Eenvoudigere header achtergrondkleur
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            ('FONTSIZE', (0, 0), (-1, -1), 5.5), # Eenvoudige grid lijnen
+            ('FONTSIZE', (0, 0), (-1, -1), 5.5), # lettergrootte
         ]))
 
         onderdelen.append(table)
