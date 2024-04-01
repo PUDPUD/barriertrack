@@ -73,6 +73,8 @@ def logging_ophalen_groep(begin_tijd, eind_tijd, event_type, hostname):
         if conn:
             conn.close()
 
+            
+
 #inspiratie voor het PDF raport: https://zewaren.net/reportlab.html
 #deze functie haalt niet alleen de records op maar, maakt tegelijkertijd ook een PDF raport met de data
 def haal_laatste_x_records_op(x):
