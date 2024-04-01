@@ -1,9 +1,9 @@
 # barriertrack || Hoofdserver Readme
 
 Welkom bij de Barriertrack hoofdserver handleiding. Met deze oplossing kan je  auth.log logging van al je Ubuntu servers centraal worden gebracht voor analyse, visualisatie en archivering.
-Deze readme is voro de hoofdserver, met de database, API en Dashbaord. V
+Deze readme is voor de hoofdserver, met de database, API en Dashbaord.
 
-Voor de installatie en configurati readme van de agent, die op elke individuele server draait, ga naar de agent directory.
+Voor de installatie en configuratie readme van de agent, die op elke individuele server draait, ga naar de agent directory.
 
 
 Vereistem
@@ -52,8 +52,8 @@ Voor een goede werkend hoofdserver moet je eerst de variablen en aanpassen indie
 ## Stap 2 Installatie docker en docker compose
 
 ### Docker en Python Dependencies
-- **Docker**: nodig voor het opzetten van de database en pgAdmin. Zie [Docker's officiële documentatie](https://docs.docker.com/engine/install/ubuntu/) voor installatie.\
-- **Docker**: nodig voor het opzetten van de database en pgAdmin. Zie [Docker's officiële documentatie](https://docs.docker.com/compose/install/linux/#install-using-the-repository/) voor installatie.
+- **Docker**: nodig voor het opzetten van de database en pgAdmin. Zie [Docker Ubuntu](https://docs.docker.com/engine/install/ubuntu/) 
+- **Docker Compose**: nodig voor het configureren & beheren van de containers[Docker compose Ubuntu](https://docs.docker.com/compose/install/linux/#install-using-the-repository/) 
 - **Python Dependencies**: Installeer via `requirements.txt` met het commando `pip install -r requirements.txt`.
 
 Voer de volgende commandos uit:
@@ -77,16 +77,45 @@ pip install -r requirements.txt
 1. Start de services met Docker-compose: `sudo docker-compose up -d` vanuit de `barriertrack/database` directory.
 2. Maak `install_config.sh` uitvoerbaar met `chmod +x install_config.sh` en voer het uit met `./install_config.sh`.
 
+Hierna is de gebruiker aangemaakt en PGadmin beschikbaar op: http://jouw_ip:8888
+
+
 ### API
 De API verbindt met de database om logdata te ontvangen en te verwerken.
 - **Automatisch Starten**: Gebruik `./install.sh` om de API als service te installeren.
+``` 
+chmod +x install_barriertrack_api.sh
+./install_barriertrack_api.sh
+```
+bekijk de status van het dahsboard:
+```
+systemctl status barriertrack_dashboard
+```
+
 - **Handmatig Starten**: Voer `python3 api.py` uit voor een directe start.
+bash
+```
+python3 api.py
+```
+
 
 ### Dashboard
 Het dashboard biedt een visuele weergave van de data.
-De API verbindt met de database om logdata te ontvangen en te verwerken.
-- **Automatisch Starten**: Gebruik `./install.sh` om de API als service te installeren.
-- **Starten**: Voer `python3 dashboard.py` uit in de dashboard directory om het dashboard te starten.
+- **Automatisch Starten**: Om barriertrack_dashboard als een service te starten voer het volgende uit:
+``` 
+chmod +x install_barriertrack_dashboard.sh
+./install_barriertrack_dashboard.sh
+```
+bekijk de status van het dahsboard:
+```
+systemctl status barriertrack_dashboard
+```
+
+- **Handmatig Starten**: Voer `dashboard api.py` uit voor een directe start.
+bash
+```
+python3 dashboard.py
+```
 
 
 # Api en Data Verwerking
